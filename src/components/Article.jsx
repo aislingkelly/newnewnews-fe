@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getArticle, patchArticle } from '../utils/api';
+import { getArticle } from '../utils/api';
 import Comments from './Comments';
-import Votes from './Votes';
+import ArticleVoting from './ArticleVoting';
 
 function Article() {
   const { article_id } = useParams();
@@ -34,7 +34,7 @@ function Article() {
         <img src={article.article_img_url} alt={article.title} />
         <p>{article.body}</p>
         <small>This article was written by: {article.author}</small>
-        <Votes article_id={article_id} initialVotes={article.votes} />
+        <ArticleVoting article_id={article_id} initialVotes={article.votes} />
       </article>
       <Comments />
     </main>

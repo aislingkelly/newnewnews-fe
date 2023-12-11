@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { patchArticle } from '../utils/api';
 
-function Votes({ article_id, initialVotes }) {
+function ArticleVoting({ article_id, initialVotes }) {
   const [upvoteIsDisabled, setUpvoteIsDisabled] = useState(false);
   const [downvoteIsDisabled, setDownvoteIsDisabled] = useState(false);
   const [votes, setVotes] = useState(initialVotes);
@@ -40,4 +40,4 @@ function Votes({ article_id, initialVotes }) {
   );
 }
 
-export default Votes;
+export default ArticleVoting;
