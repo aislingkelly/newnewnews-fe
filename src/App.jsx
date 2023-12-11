@@ -1,6 +1,5 @@
 import Article from './components/Article';
 import ArticleList from './components/ArticleList';
-
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Nav from './components/Nav';
