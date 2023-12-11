@@ -114,3 +114,8 @@ footer {
   max-width: 200px;
   padding: 2em;
 }
+
+.link-styles {
+  text-decoration: none;
+  color: black;
+}
