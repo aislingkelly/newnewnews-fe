@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getArticles } from '../utils/api';
-
+import ArticleCard from './ArticleCard';
+import { Link } from 'react-router-dom';
 function ArticleList() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,22 +32,7 @@ function ArticleList() {
         {articles.map((article) => {
           return (
             <li key={article.article_id}>
-              <article class="article-list-article">
-                <div>
-                  <h3>{article.title}</h3>
-                  <small>
-                    Votes: {article.votes} | Comment count:{' '}
-                    {article.comment_count} | Topic: {article.topic} | Created
-                    at: {article.created_at}
-                  </small>
-                </div>
-                <div>
-                  <img
-                    src={article.article_img_url}
-                    className="article-list-img"
-                  />
-                </div>
-              </article>
+              <ArticleCard article={article} />
             </li>
           );
         })}

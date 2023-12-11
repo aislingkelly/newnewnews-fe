@@ -9,3 +9,22 @@ export const getArticles = () => {
     return response.data.articles;
   });
 };
+
+export const getArticle = (article_id) => {
+  return api.get(`/articles/${article_id}`).then((response) => {
+    return response.data.article;
+  });
+};
+
+export const getComments = (article_id) => {
+  return api.get(`/articles/${article_id}/comments`).then((response) => {
+    return response.data.comments;
+  });
+};
+
+export const patchArticle = (article_id) => {
+  const patchBody = { inc_votes: 1 };
+  return api.patch(`/articles/${article_id}`, patchBody).then((response) => {
+    return response.data.article;
+  });
+};
