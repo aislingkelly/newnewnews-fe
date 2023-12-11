@@ -16,8 +16,10 @@ export const getArticle = (article_id) => {
   });
 };
 
+
 export const getComments = (article_id) => {
   return api.get(`/articles/${article_id}/comments`).then((response) => {
     return response.data.comments;
   });
 };
+
