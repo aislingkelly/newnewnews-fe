@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle, patchArticle } from '../utils/api';
 import Comments from './Comments';
+import Votes from './Votes';
 
 function Article() {
   const { article_id } = useParams();
@@ -20,15 +21,6 @@ function Article() {
       });
   }, []);
 
-  const upvoteArticle = (article_id) => {
-    patchArticle(article_id).catch((err) => {
-      setError(true);
-    });
-    setArticle((currArticle) => {
-      return { ...currArticle, votes: currArticle.votes + 1 };
-    });
-  };
-
   if (loading) {
     return <p>loading!</p>;
   }
@@ -42,8 +34,7 @@ function Article() {
         <img src={article.article_img_url} alt={article.title} />
         <p>{article.body}</p>
         <small>This article was written by: {article.author}</small>
-        <p>Votes: {article.votes}</p>
-        <button onClick={() => upvoteArticle(article_id)}>Upvote: ☝️</button>
+        <Votes article_id={article_id} initialVotes={article.votes} />
       </article>
       <Comments />
     </main>
