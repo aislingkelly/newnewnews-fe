@@ -89,7 +89,20 @@ footer {
   padding: 10px;
 }
 
-.article-list {
+.comments-section {
+  border: 1px solid pink;
+  margin: 10px;
+  padding: 10px;
+}
+
+.comment-card {
+  border: 1px solid red;
+  margin: 10px;
+  padding: 10px;
+}
+
+.article-list,
+.comment-list {
   list-style-type: none;
 }
 
@@ -100,4 +113,9 @@ footer {
 .article-list-img {
   max-width: 200px;
   padding: 2em;
+}
+
+.link-styles {
+  text-decoration: none;
+  color: black;
 }

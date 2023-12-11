@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle } from '../utils/api';
 
+import Comments from './Comments';
+
+
 function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
@@ -33,6 +36,9 @@ function Article() {
         <p>{article.body}</p>
         <small>This article was written by: {article.author} </small>
       </article>
+
+      <Comments />
+
     </main>
   );
 }
