@@ -1,7 +1,10 @@
+import Nav from './Nav';
+
 function Header() {
   return (
     <header>
-      <h2>Header</h2>
+      <h1>Welcome to NC News</h1>
+      <Nav />
     </header>
   );
 }

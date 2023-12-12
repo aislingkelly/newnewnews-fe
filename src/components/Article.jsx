@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getArticle } from '../utils/api';
 
 import Comments from './Comments';
+import ArticleVoting from './ArticleVoting';
 
 
 function Article() {
@@ -34,7 +35,8 @@ function Article() {
         <h2>{article.title}</h2>
         <img src={article.article_img_url} alt={article.title} />
         <p>{article.body}</p>
-        <small>This article was written by: {article.author} </small>
+        <small>This article was written by: {article.author}</small>
+        <ArticleVoting article_id={article_id} initialVotes={article.votes} />
       </article>
 
       <Comments />
