@@ -1,0 +1,55 @@
+import { useState } from 'react';
+import { patchArticle } from '../utils/api';
+
+function ArticleVoting({ article_id, initialVotes }) {
+  const [error, setError] = useState(false);
+  const [upvoteIsDisabled, setUpvoteIsDisabled] = useState(false);
+  const [downvoteIsDisabled, setDownvoteIsDisabled] = useState(false);
+  const [votes, setVotes] = useState(initialVotes);
+
+  const changeArticleVotes = (article_id, newVote, voteReceived) => {
+    setVotes(votes + newVote);
+    patchArticle(article_id, newVote).catch((err) => {
+      console.log('hey');
+      setError(true);
+      setVotes(votes);
+    });
+
+    if (!upvoteIsDisabled && !downvoteIsDisabled && voteReceived === 'upvote') {
+      setUpvoteIsDisabled(true);
+    } else if (
+      !upvoteIsDisabled &&
+      !downvoteIsDisabled &&
+      voteReceived === 'downvote'
+    ) {
+      setDownvoteIsDisabled(true);
+    } else if (upvoteIsDisabled && voteReceived === 'downvote') {
+      setUpvoteIsDisabled(false);
+    } else if (downvoteIsDisabled && voteReceived === 'upvote') {
+      setDownvoteIsDisabled(false);
+    }
+  };
+
+  if (error) {
+    return <p>There's a problem with your vote</p>;
+  }
+  return (
+    <>
+      <p>Votes: {votes}</p>
+      <button
+        onClick={() => changeArticleVotes(article_id, 1, 'upvote')}
+        disabled={upvoteIsDisabled}
+      >
+        Upvote: ☝️
+      </button>
+      <button
+        onClick={() => changeArticleVotes(article_id, -1, 'downvote')}
+        disabled={downvoteIsDisabled}
+      >
+        Downvote: 👇
+      </button>
+    </>
+  );
+}
+
+export default ArticleVoting;

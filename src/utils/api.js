@@ -23,3 +23,10 @@ export const getComments = (article_id) => {
   });
 };
 
+export const patchArticle = (article_id, newVote) => {
+  const patchBody = { inc_votes: newVote };
+  return api.patch(`/articles/${article_id}`, patchBody).then((response) => {
+    return response.data.article;
+  });
+};
+
