@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom';
 
 function ArticleCard({ article }) {
   return (
+
     <Link to={`/articles/${article.article_id}`} className={'link-styles'}>
+
       <article className="article-list-article">
         <div>
           <h3>{article.title}</h3>
