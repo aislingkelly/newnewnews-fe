@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { postComment } from '../utils/api';
-
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 function CommentPosting({ article_id, setComments }) {
+  const { user } = useContext(UserContext);
   const [error, setError] = useState(false);
-  const [input, setInput] = useState({ username: '', body: '' });
+  const [input, setInput] = useState({ username: user, body: '' });
 
   const updateInput = (e) => {
     const { name, value } = e.target;
