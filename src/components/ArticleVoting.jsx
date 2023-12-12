@@ -12,12 +12,22 @@ function ArticleVoting({ article_id, initialVotes }) {
       setVotes(votes);
     });
     setVotes(votes + newVote);
-    if (voteReceived === 'upvote') {
+
+    // if both enabled, disable the click
+    // if one disabled, enable that and disable the other
+
+    if (!upvoteIsDisabled && !downvoteIsDisabled && voteReceived === 'upvote') {
       setUpvoteIsDisabled(true);
-      setDownvoteIsDisabled(false);
-    } else if (voteReceived === 'downvote') {
-      setUpvoteIsDisabled(false);
+    } else if (
+      !upvoteIsDisabled &&
+      !downvoteIsDisabled &&
+      voteReceived === 'downvote'
+    ) {
       setDownvoteIsDisabled(true);
+    } else if (upvoteIsDisabled && voteReceived === 'downvote') {
+      setUpvoteIsDisabled(false);
+    } else if (downvoteIsDisabled && voteReceived === 'upvote') {
+      setDownvoteIsDisabled(false);
     }
   };
 
