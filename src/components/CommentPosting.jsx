@@ -7,6 +7,7 @@ function CommentPosting({ article_id, setComments }) {
   const [error, setError] = useState(false);
   const [input, setInput] = useState({ username: user, body: '' });
   const [validateMsg, setValidateMsg] = useState(false);
+  const [loading, setLoading] = useState(false);
   const updateInput = (e) => {
     if (input.body.length < 20) {
       setValidateMsg(true);
@@ -22,6 +23,7 @@ function CommentPosting({ article_id, setComments }) {
       setValidateMsg(true);
       e.preventDefault();
     } else {
+      setLoading(true);
       setValidateMsg(false);
       e.preventDefault();
       postComment(input, article_id)
@@ -30,6 +32,7 @@ function CommentPosting({ article_id, setComments }) {
           setComments((currComments) => {
             return [response, ...currComments];
           });
+          setLoading(false);
         })
         .catch((error) => {
           setError(true);
@@ -42,6 +45,9 @@ function CommentPosting({ article_id, setComments }) {
 
   if (error) {
     return <p>There's an issue with your comment. Please try again.</p>;
+  }
+  if (loading) {
+    return <p>Working on it...</p>;
   }
   return (
     <>
