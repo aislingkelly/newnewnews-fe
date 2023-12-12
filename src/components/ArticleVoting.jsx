@@ -15,18 +15,12 @@ function ArticleVoting({ article_id, initialVotes }) {
       setVotes(votes);
     });
 
-    if (!upvoteIsDisabled && !downvoteIsDisabled && voteReceived === 'upvote') {
-      setUpvoteIsDisabled(true);
-    } else if (
-      !upvoteIsDisabled &&
-      !downvoteIsDisabled &&
-      voteReceived === 'downvote'
-    ) {
-      setDownvoteIsDisabled(true);
-    } else if (upvoteIsDisabled && voteReceived === 'downvote') {
-      setUpvoteIsDisabled(false);
-    } else if (downvoteIsDisabled && voteReceived === 'upvote') {
+    if (voteReceived === 'upvote') {
+      setUpvoteIsDisabled(!downvoteIsDisabled);
       setDownvoteIsDisabled(false);
+    } else if (voteReceived === 'downvote') {
+      setDownvoteIsDisabled(!upvoteIsDisabled);
+      setUpvoteIsDisabled(false);
     }
   };
 

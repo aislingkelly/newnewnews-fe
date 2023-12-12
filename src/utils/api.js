@@ -16,7 +16,6 @@ export const getArticle = (article_id) => {
   });
 };
 
-
 export const getComments = (article_id) => {
   return api.get(`/articles/${article_id}/comments`).then((response) => {
     return response.data.comments;
@@ -30,3 +29,11 @@ export const patchArticle = (article_id, newVote) => {
   });
 };
 
+export const postComment = (input, article_id) => {
+  const postBody = input;
+  return api
+    .post(`/articles/${article_id}/comments`, postBody)
+    .then((response) => {
+      return response.data.comment;
+    });
+};
