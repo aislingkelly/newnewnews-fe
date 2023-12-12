@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { postComment } from '../utils/api';
 
 function CommentPosting({ article_id, setComments }) {
+  const [error, setError] = useState(false);
   const [input, setInput] = useState({ username: '', body: '' });
 
   const updateInput = (e) => {
@@ -19,9 +20,13 @@ function CommentPosting({ article_id, setComments }) {
         });
       })
       .catch((error) => {
-        console.log(error);
+        setError(true);
       });
   };
+
+  if (error) {
+    return <p>There's an issue with your comment. Please try again.</p>;
+  }
   return (
     <>
       <h4>Post a comment</h4>
@@ -37,8 +42,7 @@ function CommentPosting({ article_id, setComments }) {
             name="username"
           />
           <label htmlFor="comment-body-input">Your comment: </label>
-          <input
-            type="text"
+          <textarea
             placeholder="Your comment"
             id="comment-body-input"
             onChange={updateInput}
