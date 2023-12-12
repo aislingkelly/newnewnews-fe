@@ -16,7 +16,7 @@ function CommentPosting({ article_id, setComments }) {
     e.preventDefault();
     postComment(input, article_id)
       .then((response) => {
-        setInput({ username: '', body: '' });
+        setInput({ username: user, body: '' });
         setComments((currComments) => {
           return [response, ...currComments];
         });
