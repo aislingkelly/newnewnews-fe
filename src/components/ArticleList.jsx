@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getArticles } from '../utils/api';
 import ArticleCard from './ArticleCard';
-import { Link } from 'react-router-dom';
+
 function ArticleList() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,8 +26,6 @@ function ArticleList() {
   }
   return (
     <main>
-      <h2>Article List</h2>
-
       <ul className="article-list">
         {articles.map((article) => {
           return (

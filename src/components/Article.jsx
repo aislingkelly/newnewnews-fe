@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle } from '../utils/api';
 
-import Comments from './Comments';
+
+import CommentList from './CommentList';
 import ArticleVoting from './ArticleVoting';
 
 
@@ -39,8 +40,7 @@ function Article() {
         <ArticleVoting article_id={article_id} initialVotes={article.votes} />
       </article>
 
-      <Comments />
-
+      <CommentList />
     </main>
   );
 }

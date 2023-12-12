@@ -1,3 +1,11 @@
+:root {
+  --black: #0d0d0d;
+  --red: #bf1b1b;
+  --blue: #164f73;
+  --dark-orange: #d9501e;
+  --orange: #f28a2e;
+}
+
 html {
   font-size: 16px;
 }
@@ -6,6 +14,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: false;
   line-height: 1.65;
+  color: var(--black);
 }
 
 p {
@@ -102,10 +111,13 @@ footer {
 .article-list,
 .comment-list {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .article-list-article {
   display: flex;
+  justify-content: space-between;
 }
 
 .article-list-img {
@@ -115,5 +127,17 @@ footer {
 
 .link-styles {
   text-decoration: none;
-  color: black;
+  color: var(--black);
+}
+
+.article-list-article h3 {
+  margin-top: 0;
+}
+
+.blue-topper {
+  background-color: var(--blue);
+  color: white;
+  font-weight: 900;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
 }
