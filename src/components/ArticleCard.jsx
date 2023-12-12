@@ -12,16 +12,6 @@ function ArticleCard({ article }) {
     month: 'short',
   }).format(date);
 
-  console.log(
-    new Intl.DateTimeFormat('default', {
-      hour: 'numeric',
-      minute: 'numeric',
-      day: 'numeric',
-      year: 'numeric',
-      month: 'short',
-    }).format(date)
-  );
-
   return (
     <Link to={`/articles/${article.article_id}`} className={'link-styles'}>
       <article className="article-list-article">

@@ -2,19 +2,18 @@ import { useState } from 'react';
 import { patchArticle } from '../utils/api';
 
 function ArticleVoting({ article_id, initialVotes }) {
+  const [error, setError] = useState(false);
   const [upvoteIsDisabled, setUpvoteIsDisabled] = useState(false);
   const [downvoteIsDisabled, setDownvoteIsDisabled] = useState(false);
   const [votes, setVotes] = useState(initialVotes);
 
   const changeArticleVotes = (article_id, newVote, voteReceived) => {
+    setVotes(votes + newVote);
     patchArticle(article_id, newVote).catch((err) => {
+      console.log('hey');
       setError(true);
       setVotes(votes);
     });
-    setVotes(votes + newVote);
-
-    // if both enabled, disable the click
-    // if one disabled, enable that and disable the other
 
     if (!upvoteIsDisabled && !downvoteIsDisabled && voteReceived === 'upvote') {
       setUpvoteIsDisabled(true);
@@ -31,6 +30,9 @@ function ArticleVoting({ article_id, initialVotes }) {
     }
   };
 
+  if (error) {
+    return <p>There's a problem with your vote</p>;
+  }
   return (
     <>
       <p>Votes: {votes}</p>

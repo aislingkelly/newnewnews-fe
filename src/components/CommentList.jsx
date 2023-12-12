@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getComments } from '../utils/api';
 import CommentCard from './CommentCard';
-
-function Comments() {
+import CommentPosting from './CommentPosting';
+function CommentList() {
   const { article_id } = useParams();
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(false);
@@ -29,6 +29,7 @@ function Comments() {
   return (
     <section className="comments-section">
       <h3>Comments</h3>
+      <CommentPosting article_id={article_id} setComments={setComments} />
       <ul className="comment-list">
         {comments.map((comment) => {
           return (
@@ -42,4 +43,4 @@ function Comments() {
   );
 }
 
-export default Comments;
+export default CommentList;
