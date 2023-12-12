@@ -37,3 +37,4 @@ export const postComment = (input, article_id) => {
       return response.data.comment;
     });
 };
+
