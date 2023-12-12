@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle } from '../utils/api';
 
+
 import CommentList from './CommentList';
 import ArticleVoting from './ArticleVoting';
+
 
 function Article() {
   const { article_id } = useParams();
