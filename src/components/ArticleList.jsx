@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getArticles } from '../utils/api';
 import { useSearchParams } from 'react-router-dom';
 import ArticleCard from './ArticleCard';
+import Sort from './Sort';
 
 function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -9,8 +10,12 @@ function ArticleList() {
   const [error, setError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const topicQuery = searchParams.get('topic');
+  const [sortQuery, setSortQuery] = useState('comment_count');
+  const [orderQuery, setOrderQuery] = useState('desc');
+
   useEffect(() => {
-    getArticles(topicQuery)
+    setLoading(true);
+    getArticles(topicQuery, sortQuery, orderQuery)
       .then((data) => {
         setArticles(data);
         setLoading(false);
@@ -19,7 +24,7 @@ function ArticleList() {
         console.log(error);
         setError(true);
       });
-  }, [topicQuery]);
+  }, [topicQuery, sortQuery, orderQuery]);
 
   if (loading) {
     return <p>loading!</p>;
@@ -29,6 +34,12 @@ function ArticleList() {
   }
   return (
     <main>
+      <Sort
+        setSortQuery={setSortQuery}
+        sortQuery={sortQuery}
+        setOrderQuery={setOrderQuery}
+        orderQuery={orderQuery}
+      />
       <ul className="article-list grid">
         {articles.map((article) => {
           return (

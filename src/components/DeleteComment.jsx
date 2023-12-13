@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { deleteComment } from '../utils/api';
 
 function DeleteCommentButton({ comment, setComments }) {
