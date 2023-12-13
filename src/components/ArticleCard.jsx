@@ -15,17 +15,14 @@ function ArticleCard({ article }) {
   return (
     <Link to={`/articles/${article.article_id}`} className={'link-styles'}>
       <article className="article-list-article">
-        <div>
-          <small className="blue-topper">{article.topic}</small>
-          <h3>{article.title}</h3>
-          <p>
-            {publishedAt} <MdThumbsUpDown />
-            {article.votes} <MdComment /> {article.comment_count}
-          </p>
-        </div>
-        <div>
-          <img src={article.article_img_url} className="article-list-img" />
-        </div>
+        <small className="blue-topper">{article.topic}</small>
+        <br></br>
+        <img src={article.article_img_url} className="article-list-img" />
+        <h3>{article.title}</h3>
+        <p>
+          {publishedAt} <MdThumbsUpDown />
+          {article.votes} <MdComment /> {article.comment_count}
+        </p>
       </article>
     </Link>
   );

@@ -4,8 +4,9 @@ const api = axios.create({
   baseURL: 'https://new-new-news.onrender.com/api',
 });
 
-export const getArticles = () => {
-  return api.get(`/articles`).then((response) => {
+export const getArticles = (topicQuery) => {
+  let queryString = topicQuery ? `?topic=${topicQuery}` : '';
+  return api.get(`/articles/${queryString}`).then((response) => {
     return response.data.articles;
   });
 };
@@ -36,4 +37,14 @@ export const postComment = (input, article_id) => {
     .then((response) => {
       return response.data.comment;
     });
+};
+
+export const deleteComment = (comment_id) => {
+  return api.delete(`/comments/${comment_id}`);
+};
+
+export const getTopics = () => {
+  return api.get(`/topics`).then((response) => {
+    return response.data;
+  });
 };
