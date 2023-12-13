@@ -4,11 +4,18 @@ const api = axios.create({
   baseURL: 'https://new-new-news.onrender.com/api',
 });
 
-export const getArticles = (topicQuery) => {
-  let queryString = topicQuery ? `?topic=${topicQuery}` : '';
-  return api.get(`/articles/${queryString}`).then((response) => {
-    return response.data.articles;
-  });
+export const getArticles = (topicQuery, sortQuery, orderQuery) => {
+  let sortString = sortQuery
+    ? `/?sort_by=${sortQuery}`
+    : '/?sort_by=comment_count';
+  let orderString = orderQuery ? `&order=${orderQuery}` : '&order=asc';
+  let queryString = topicQuery ? `&topic=${topicQuery}` : '';
+
+  return api
+    .get(`/articles${sortString}${orderString}${queryString}`)
+    .then((response) => {
+      return response.data.articles;
+    });
 };
 
 export const getArticle = (article_id) => {
@@ -48,3 +55,4 @@ export const getTopics = () => {
     return response.data;
   });
 };
+
