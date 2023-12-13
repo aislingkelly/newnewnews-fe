@@ -21,7 +21,7 @@ function Topics() {
     return <p>loading!</p>;
   }
   if (error) {
-    return <p>error!</p>;
+    return <p>Something went wrong here</p>;
   }
   return (
     <ul className="topic-list">

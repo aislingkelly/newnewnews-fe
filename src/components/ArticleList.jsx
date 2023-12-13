@@ -2,33 +2,47 @@ import { useEffect, useState } from 'react';
 import { getArticles } from '../utils/api';
 import { useSearchParams } from 'react-router-dom';
 import ArticleCard from './ArticleCard';
+import Sort from './Sort';
+import ErrorHandling from './ErrorHandling';
 
 function ArticleList() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const topicQuery = searchParams.get('topic');
+  const [sortQuery, setSortQuery] = useState('comment_count');
+  const [orderQuery, setOrderQuery] = useState('desc');
+
   useEffect(() => {
-    getArticles(topicQuery)
+    setError(false);
+    getArticles(topicQuery, sortQuery, orderQuery)
       .then((data) => {
         setArticles(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false);
         setError(true);
+        setErrMsg(error.response.data);
       });
-  }, [topicQuery]);
+  }, [topicQuery, sortQuery, orderQuery]);
 
   if (loading) {
     return <p>loading!</p>;
   }
   if (error) {
-    return <p>error!</p>;
+    return <ErrorHandling errMsg={errMsg} />;
   }
   return (
     <main>
+      <Sort
+        setSortQuery={setSortQuery}
+        sortQuery={sortQuery}
+        setOrderQuery={setOrderQuery}
+        orderQuery={orderQuery}
+      />
       <ul className="article-list grid">
         {articles.map((article) => {
           return (

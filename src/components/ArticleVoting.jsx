@@ -10,7 +10,6 @@ function ArticleVoting({ article_id, initialVotes }) {
   const changeArticleVotes = (article_id, newVote, voteReceived) => {
     setVotes(votes + newVote);
     patchArticle(article_id, newVote).catch((err) => {
-      console.log('hey');
       setError(true);
       setVotes(votes);
     });

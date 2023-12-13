@@ -1,26 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle } from '../utils/api';
-
-
 import CommentList from './CommentList';
 import ArticleVoting from './ArticleVoting';
-
+import ErrorHandling from './ErrorHandling';
 
 function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [errMsg, setErrMsg] = useState('');
 
   useEffect(() => {
+    setError(false);
     getArticle(article_id)
       .then((data) => {
         setArticle(data);
         setLoading(false);
       })
       .catch((error) => {
+        setLoading(false);
         setError(true);
+        setErrMsg(error.response.data);
       });
   }, []);
 
@@ -28,7 +30,7 @@ function Article() {
     return <p>loading!</p>;
   }
   if (error) {
-    return <p>error!</p>;
+    return <ErrorHandling errMsg={errMsg} />;
   }
   return (
     <main>
