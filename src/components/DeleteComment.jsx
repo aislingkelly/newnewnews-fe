@@ -18,25 +18,22 @@ function DeleteCommentButton({ comment, setComments }) {
       })
       .catch((err) => {
         setError(true);
-        setTimeout(() => {
-          setError(false);
-        }, 2000);
+        setLoading(false);
       });
   };
 
-  if (loading) {
-    return <p>working on it...</p>;
-  }
-
-  if (error) {
-    return <p>There's an issue with your comment. Please try again.</p>;
-  }
-
   return (
     <>
-      <button onClick={() => handleDeleteClick(comment.comment_id)}>
+      <button
+        onClick={() => handleDeleteClick(comment.comment_id)}
+        disabled={loading}
+      >
         Delete Comment?
       </button>
+      {loading ? <p>working on it...</p> : null}
+      {error ? (
+        <p>There's an issue deleting your comment. Please try again.</p>
+      ) : null}
     </>
   );
 }

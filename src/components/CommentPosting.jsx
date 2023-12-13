@@ -19,13 +19,14 @@ function CommentPosting({ article_id, setComments }) {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     if (input.body.length < 20) {
       setValidateMsg(true);
-      e.preventDefault();
     } else {
       setLoading(true);
+      setError(false);
       setValidateMsg(false);
-      e.preventDefault();
+
       postComment(input, article_id)
         .then((response) => {
           setInput({ username: user, body: '' });
@@ -36,19 +37,11 @@ function CommentPosting({ article_id, setComments }) {
         })
         .catch((error) => {
           setError(true);
-          setTimeout(() => {
-            setError(false);
-          }, 2000);
+          setLoading(false);
         });
     }
   };
 
-  if (error) {
-    return <p>There's an issue with your comment. Please try again.</p>;
-  }
-  if (loading) {
-    return <p>Working on it...</p>;
-  }
   return (
     <>
       <h4>Post a comment</h4>
@@ -79,8 +72,12 @@ function CommentPosting({ article_id, setComments }) {
             {validateMsg ? 'Your comment must be 20 characters or more' : null}
           </p>
 
-          <button>Submit</button>
+          <button disabled={loading}>Submit</button>
         </form>
+        {loading ? <p>working on it...</p> : null}
+        {error ? (
+          <p>There's an issue posting your comment. Please try again.</p>
+        ) : null}
       </div>
     </>
   );

@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import Topics from './Topics';
 
 function Nav() {
   return (
     <nav>
-      <Link to="/">Home</Link> | <Link to="/topics">Topics</Link>
+      {/* <Link to="/">Home</Link> */}
+      <Topics />
     </nav>
   );
 }
