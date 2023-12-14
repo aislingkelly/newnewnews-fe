@@ -1,34 +1,35 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle } from '../utils/api';
-
-
 import CommentList from './CommentList';
 import ArticleVoting from './ArticleVoting';
-
+import ErrorHandling from './ErrorHandling';
 
 function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [errMsg, setErrMsg] = useState('');
 
   useEffect(() => {
+    setErrMsg('');
     getArticle(article_id)
       .then((data) => {
         setArticle(data);
         setLoading(false);
       })
       .catch((error) => {
-        setError(true);
+        setLoading(false);
+        setErrMsg(error.response.data);
       });
-  }, []);
+  }, [article_id]); // Added dependency to re-fetch if article_id changes
 
   if (loading) {
-    return <p>loading!</p>;
+    return <p>Loading...</p>;
   }
-  if (error) {
-    return <p>error!</p>;
+  if (errMsg) {
+    // Check if errMsg is non-empty to determine error state
+    return <ErrorHandling errMsg={errMsg} />;
   }
   return (
     <main>

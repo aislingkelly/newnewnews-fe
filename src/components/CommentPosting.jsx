@@ -74,9 +74,9 @@ function CommentPosting({ article_id, setComments }) {
 
           <button disabled={loading}>Submit</button>
         </form>
-        {loading ? <p>working on it...</p> : null}
+        {loading ? <p>Working on it...</p> : null}
         {error ? (
-          <p>There's an issue posting your comment. Please try again.</p>
+          <p>There's an issue posting your comment. Are you logged in?</p>
         ) : null}
       </div>
     </>

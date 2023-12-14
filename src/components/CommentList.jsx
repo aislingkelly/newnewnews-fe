@@ -3,13 +3,17 @@ import { useParams } from 'react-router-dom';
 import { getComments } from '../utils/api';
 import CommentCard from './CommentCard';
 import CommentPosting from './CommentPosting';
+import ErrorHandling from './ErrorHandling';
+
 function CommentList() {
   const { article_id } = useParams();
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setError(false);
     getComments(article_id)
       .then((data) => {
         setComments(data);
@@ -17,6 +21,7 @@ function CommentList() {
       })
       .catch((error) => {
         setError(true);
+        setErrMsg(error.response.data);
       });
   }, []);
 
@@ -24,7 +29,7 @@ function CommentList() {
     return <p>loading!</p>;
   }
   if (error) {
-    return <p>error!</p>;
+    return <ErrorHandling errMsg={errMsg} />;
   }
   return (
     <section className="comments-section">

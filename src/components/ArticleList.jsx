@@ -4,33 +4,40 @@ import { useSearchParams } from 'react-router-dom';
 import ArticleCard from './ArticleCard';
 import Sort from './Sort';
 
+import ErrorHandling from './ErrorHandling';
+
+
 function ArticleList() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const topicQuery = searchParams.get('topic');
   const [sortQuery, setSortQuery] = useState('comment_count');
   const [orderQuery, setOrderQuery] = useState('desc');
 
   useEffect(() => {
+
+    setErrMsg('');
+
     setLoading(true);
+
     getArticles(topicQuery, sortQuery, orderQuery)
       .then((data) => {
         setArticles(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
-        setError(true);
+        setLoading(false);
+        setErrMsg(error.response.data);
       });
   }, [topicQuery, sortQuery, orderQuery]);
 
   if (loading) {
     return <p>loading!</p>;
   }
-  if (error) {
-    return <p>error!</p>;
+  if (errMsg) {
+    return <ErrorHandling errMsg={errMsg} />;
   }
   return (
     <main>
