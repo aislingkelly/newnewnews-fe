@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { deleteComment } from '../utils/api';
 import { FaTrashCan } from 'react-icons/fa6';
 
@@ -35,6 +36,7 @@ function DeleteCommentButton({ comment, setComments }) {
       {error ? (
         <p>There's an issue deleting your comment. Please try again.</p>
       ) : null}
+
     </>
   );
 }

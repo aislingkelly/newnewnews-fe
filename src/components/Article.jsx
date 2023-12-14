@@ -8,12 +8,11 @@ import ErrorHandling from './ErrorHandling';
 function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState('');
 
   useEffect(() => {
-    setError(false);
+    setErrMsg('');
     getArticle(article_id)
       .then((data) => {
         setArticle(data);
@@ -21,15 +20,15 @@ function Article() {
       })
       .catch((error) => {
         setLoading(false);
-        setError(true);
         setErrMsg(error.response.data);
       });
-  }, []);
+  }, [article_id]); // Added dependency to re-fetch if article_id changes
 
   if (loading) {
-    return <p>loading!</p>;
+    return <p>Loading...</p>;
   }
-  if (error) {
+  if (errMsg) {
+    // Check if errMsg is non-empty to determine error state
     return <ErrorHandling errMsg={errMsg} />;
   }
   return (
