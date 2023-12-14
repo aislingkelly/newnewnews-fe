@@ -3,7 +3,9 @@ import { getArticles } from '../utils/api';
 import { useSearchParams } from 'react-router-dom';
 import ArticleCard from './ArticleCard';
 import Sort from './Sort';
+
 import ErrorHandling from './ErrorHandling';
+
 
 function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -15,7 +17,11 @@ function ArticleList() {
   const [orderQuery, setOrderQuery] = useState('desc');
 
   useEffect(() => {
+
     setErrMsg('');
+
+    setLoading(true);
+
     getArticles(topicQuery, sortQuery, orderQuery)
       .then((data) => {
         setArticles(data);

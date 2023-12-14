@@ -16,6 +16,7 @@ const Sort = ({ sortQuery, setSortQuery, orderQuery, setOrderQuery }) => {
         <option value="article_id">Article ID</option>
         <option value="created_at">Created Date</option>
       </select>
+
       <label htmlFor="order">Order: </label>
       <select name="order" value={orderQuery} onChange={handleChangeOrder}>
         <option value="asc">Ascending</option>
