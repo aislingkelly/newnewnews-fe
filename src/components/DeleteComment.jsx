@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { deleteComment } from '../utils/api';
+import { FaTrashCan } from 'react-icons/fa6';
 
 function DeleteCommentButton({ comment, setComments }) {
   const [error, setError] = useState(false);
@@ -29,7 +30,7 @@ function DeleteCommentButton({ comment, setComments }) {
         onClick={() => handleDeleteClick(comment.comment_id)}
         disabled={loading}
       >
-        Delete Comment?
+        Delete <FaTrashCan />
       </button>
       {loading ? <p>working on it...</p> : null}
       {error ? (

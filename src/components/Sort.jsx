@@ -8,12 +8,13 @@ const Sort = ({ sortQuery, setSortQuery, orderQuery, setOrderQuery }) => {
   };
 
   return (
-    <form>
-      <label htmlFor="sort">Sort: </label>
+    <form className="sort-form">
+      <label htmlFor="sort">
+        <small>Sort:</small>{' '}
+      </label>
       <select name="sort" value={sortQuery} onChange={handleChangeSort}>
         <option value="comment_count">Comment Count</option>
         <option value="votes">Votes</option>
-        <option value="article_id">Article ID</option>
         <option value="created_at">Created Date</option>
       </select>
 

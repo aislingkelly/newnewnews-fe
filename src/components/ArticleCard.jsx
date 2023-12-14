@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { MdComment } from 'react-icons/md';
-import { MdThumbsUpDown } from 'react-icons/md';
+import { FaComment } from 'react-icons/fa6';
+import { FaArrowDownUpAcrossLine } from 'react-icons/fa6';
+import { FaCalendar } from 'react-icons/fa6';
 function ArticleCard({ article }) {
   let dateString = article.created_at;
   let date = new Date(dateString);
@@ -15,14 +16,27 @@ function ArticleCard({ article }) {
   return (
     <Link to={`/articles/${article.article_id}`} className={'link-styles'}>
       <article className="article-list-article">
-        <small className="blue-topper">{article.topic}</small>
-        <br></br>
-        <img src={article.article_img_url} className="article-list-img" />
-        <h3>{article.title}</h3>
-        <p>
-          {publishedAt} <MdThumbsUpDown />
-          {article.votes} <MdComment /> {article.comment_count}
-        </p>
+        <img src={article.article_img_url} className="card-img" />
+        <div class="card-content">
+          <small className={`topic-topper ${article.topic}`}>
+            <Link to={`/articles/?topic=${article.topic}`}>
+              {article.topic}
+            </Link>
+          </small>
+          <h3>{article.title}</h3>
+        </div>
+        <div class="card-footer">
+          <p>
+            <FaCalendar /> {publishedAt}
+          </p>
+          <p>
+            <FaArrowDownUpAcrossLine />
+            {article.votes}
+          </p>
+          <p>
+            <FaComment /> {article.comment_count}
+          </p>
+        </div>
       </article>
     </Link>
   );
