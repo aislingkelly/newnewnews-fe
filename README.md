@@ -6,7 +6,6 @@
 - [Technologies Used](#technologies-used)
 - [How to Use the Project](#how-to-use-the-project)
 - [Features](#features)
-- [Hosting](#hosting)
 - [Prerequisites](#prerequisites)
 - [Setup and Local Development](#setup-and-local-development)
 - [Scripts](#scripts)
@@ -37,10 +36,6 @@ Explore the app using the navigation buttons at the top. Sort and order article 
 - **Articles:** View articles, vote, comment, and delete comments.
 - **Topics:** Shows articles sorted by topics.
 - **Errors:** Handles bad routes and API errors.
-
-## Hosting
-
-Hosted on [Netlify](https://newnewnews.netlify.app/).
 
 ## Prerequisites
 

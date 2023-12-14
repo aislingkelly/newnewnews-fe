@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { patchArticle } from '../utils/api';
-import { FaArrowTurnUp } from 'react-icons/fa6';
-import { FaArrowTurnDown } from 'react-icons/fa6';
-import { FaArrowDownUpAcrossLine } from 'react-icons/fa6';
+import {
+  FaRegHandPointUp,
+  FaRegHandPointDown,
+  FaRegHandPointRight,
+} from 'react-icons/fa6';
 
 function ArticleVoting({ article_id, initialVotes }) {
   const [error, setError] = useState(false);
@@ -26,26 +28,24 @@ function ArticleVoting({ article_id, initialVotes }) {
     }
   };
 
-  if (error) {
-    return <p>There's a problem with your vote</p>;
-  }
   return (
     <>
       <p>
-        <FaArrowDownUpAcrossLine /> {votes}
+        <FaRegHandPointRight /> {votes}
       </p>
       <button
         onClick={() => changeArticleVotes(article_id, 1, 'upvote')}
         disabled={upvoteIsDisabled}
       >
-        Upvote: <FaArrowTurnUp />
+        Upvote <FaRegHandPointUp />
       </button>
       <button
         onClick={() => changeArticleVotes(article_id, -1, 'downvote')}
         disabled={downvoteIsDisabled}
       >
-        Downvote: <FaArrowTurnDown />
+        Downvote <FaRegHandPointDown />
       </button>
+      {error ? <p>There's a problem with your vote. Try again</p> : null}
     </>
   );
 }

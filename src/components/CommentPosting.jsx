@@ -1,20 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { postComment } from '../utils/api';
-import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
-import { FaPaperPlane } from 'react-icons/fa6';
+import { FaRegPaperPlane } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
+
+import ErrorHandling from './ErrorHandling';
+
 function CommentPosting({ article_id, setComments }) {
   const { user } = useContext(UserContext);
-  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
   const [input, setInput] = useState({ username: user, body: '' });
   const [validateMsg, setValidateMsg] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const updateInput = (e) => {
-    if (input.body.length < 20) {
-      setValidateMsg(true);
-    } else {
-      setValidateMsg(false);
-    }
+    input.body.length < 20 ? setValidateMsg(true) : setValidateMsg(false);
     const { name, value } = e.target;
     setInput((prevInput) => ({ ...prevInput, [name]: value }));
   };
@@ -25,9 +25,7 @@ function CommentPosting({ article_id, setComments }) {
       setValidateMsg(true);
     } else {
       setLoading(true);
-      setError(false);
-      setValidateMsg(false);
-
+      setErrMsg('');
       postComment(input, article_id)
         .then((response) => {
           setInput({ username: user, body: '' });
@@ -37,7 +35,7 @@ function CommentPosting({ article_id, setComments }) {
           setLoading(false);
         })
         .catch((error) => {
-          setError(true);
+          setErrMsg(error.response.data);
           setLoading(false);
         });
     }
@@ -45,47 +43,50 @@ function CommentPosting({ article_id, setComments }) {
 
   return (
     <>
-      <h4>Post a comment</h4>
-      <p>Commenting as {user}</p>
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="comment-username-input" className="hidden">
-            Username:
-            <input
-              type="text"
-              placeholder="Username"
-              id="comment-username-input"
-              onChange={updateInput}
-              value={input.username}
-              name="username"
-              disabled
-            />
-          </label>
+      {' '}
+      {user ? (
+        <>
+          <h5>Commenting as {user}</h5>
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="comment-username-input" className="hidden">
+                Username:
+                <input
+                  type="text"
+                  placeholder="Username"
+                  id="comment-username-input"
+                  onChange={updateInput}
+                  value={input.username}
+                  name="username"
+                  disabled
+                />
+              </label>
 
-          <label htmlFor="comment-body-input" class="hidden">
-            Your comment:
-          </label>
-          <textarea
-            placeholder="Your comment"
-            id="comment-body-input"
-            onChange={updateInput}
-            value={input.body}
-            name="body"
-          />
+              <label htmlFor="comment-body-input" className="hidden">
+                Your comment:
+              </label>
+              <textarea
+                placeholder="Your comment"
+                id="comment-body-input"
+                onChange={updateInput}
+                value={input.body}
+                name="body"
+              />
 
-          <button disabled={loading}>
-            Comment <FaPaperPlane />
-          </button>
-        </form>
+              <button disabled={validateMsg || loading}>
+                Comment <FaRegPaperPlane />
+              </button>
+            </form>
+            {validateMsg && <p>Your comment must be at least 20 characters</p>}
+            {loading && <p>Working on it...</p>}
+            {errMsg && <ErrorHandling errMsg={errMsg} />}
+          </div>{' '}
+        </>
+      ) : (
         <p>
-          {' '}
-          {validateMsg ? 'Your comment must be 20 characters or more' : null}
+          <Link to={`/users`}>Log in to comment</Link>
         </p>
-        {loading ? <p>Working on it...</p> : null}
-        {error ? (
-          <p>There's an issue posting your comment. Are you logged in?</p>
-        ) : null}
-      </div>
+      )}
     </>
   );
 }
