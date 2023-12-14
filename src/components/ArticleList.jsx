@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { getArticles } from '../utils/api';
 import { useSearchParams } from 'react-router-dom';
 import ArticleCard from './ArticleCard';
-import Sort from './Sort';
-
+import ArticleSort from './ArticleSort';
 import ErrorHandling from './ErrorHandling';
-
+import Loading from './Loading';
 
 function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -17,7 +16,6 @@ function ArticleList() {
   const [orderQuery, setOrderQuery] = useState('desc');
 
   useEffect(() => {
-
     setErrMsg('');
 
     setLoading(true);
@@ -34,7 +32,7 @@ function ArticleList() {
   }, [topicQuery, sortQuery, orderQuery]);
 
   if (loading) {
-    return <p>loading!</p>;
+    return <Loading />;
   }
   if (errMsg) {
     return <ErrorHandling errMsg={errMsg} />;
@@ -42,7 +40,7 @@ function ArticleList() {
   return (
     <>
       <main>
-        <Sort
+        <ArticleSort
           setSortQuery={setSortQuery}
           sortQuery={sortQuery}
           setOrderQuery={setOrderQuery}

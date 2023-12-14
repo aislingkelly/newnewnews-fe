@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getTopics } from '../utils/api';
 import { Link } from 'react-router-dom';
+import Loading from './Loading';
+import ErrorHandling from './ErrorHandling';
+
 function Topics() {
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState(false);
   useEffect(() => {
     getTopics()
       .then((data) => {
@@ -12,16 +15,15 @@ function Topics() {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
-        setError(true);
+        setErrMsg(error.response.data);
       });
   }, []);
 
   if (loading) {
-    return <p>loading!</p>;
+    return <Loading />;
   }
-  if (error) {
-    return <p>Something went wrong here</p>;
+  if (errMsg) {
+    return <ErrorHandling errMsg={errMsg} />;
   }
   return (
     <ul className="topic-list">

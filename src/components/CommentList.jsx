@@ -1,34 +1,34 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getComments } from '../utils/api';
+
 import CommentCard from './CommentCard';
 import CommentPosting from './CommentPosting';
 import ErrorHandling from './ErrorHandling';
+import Loading from './Loading';
 
 function CommentList() {
   const { article_id } = useParams();
   const [comments, setComments] = useState([]);
-  const [error, setError] = useState(false);
   const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setError(false);
     getComments(article_id)
       .then((data) => {
         setComments(data);
         setLoading(false);
       })
       .catch((error) => {
-        setError(true);
         setErrMsg(error.response.data);
+        setLoading(false);
       });
   }, []);
 
   if (loading) {
-    return <p>loading!</p>;
+    return <Loading />;
   }
-  if (error) {
+  if (errMsg) {
     return <ErrorHandling errMsg={errMsg} />;
   }
   return (

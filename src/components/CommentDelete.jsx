@@ -1,13 +1,16 @@
 import { useState } from 'react';
-
 import { deleteComment } from '../utils/api';
-import { FaTrashCan } from 'react-icons/fa6';
+import { FaRegTrashCan } from 'react-icons/fa6';
 
-function DeleteCommentButton({ comment, setComments }) {
-  const [error, setError] = useState(false);
+import ErrorHandling from './ErrorHandling';
+import Loading from './Loading';
+
+function CommentDelete({ comment, setComments }) {
+  const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleDeleteClick = (comment_id) => {
+    setErrMsg('');
     setLoading(true);
     deleteComment(comment_id)
       .then(() => {
@@ -18,11 +21,15 @@ function DeleteCommentButton({ comment, setComments }) {
         });
         setLoading(false);
       })
-      .catch((err) => {
-        setError(true);
+      .catch((error) => {
+        setErrMsg(error.response.data);
         setLoading(false);
       });
   };
+
+  if (errMsg) {
+    return <ErrorHandling errMsg={errMsg} />;
+  }
 
   return (
     <>
@@ -30,15 +37,11 @@ function DeleteCommentButton({ comment, setComments }) {
         onClick={() => handleDeleteClick(comment.comment_id)}
         disabled={loading}
       >
-        Delete <FaTrashCan />
+        Delete <FaRegTrashCan />
       </button>
       {loading ? <p>working on it...</p> : null}
-      {error ? (
-        <p>There's an issue deleting your comment. Please try again.</p>
-      ) : null}
-
     </>
   );
 }
 
-export default DeleteCommentButton;
+export default CommentDelete;

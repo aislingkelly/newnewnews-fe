@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom';
+
 import Topics from './Topics';
 
 function ErrorHandling({ errMsg }) {
+  if (errMsg.msg === 'Not logged in') {
+    return (
+      <section className="errors">
+        <p>Hmmmm, that's not working. Are you sure you're logged in?</p>
+      </section>
+    );
+  }
   if (errMsg.msg === 'path not found') {
     return (
       <section className="errors">
