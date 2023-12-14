@@ -8,7 +8,6 @@ import ErrorHandling from './ErrorHandling';
 function ArticleList() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [errMsg, setErrMsg] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const topicQuery = searchParams.get('topic');
@@ -16,7 +15,7 @@ function ArticleList() {
   const [orderQuery, setOrderQuery] = useState('desc');
 
   useEffect(() => {
-    setError(false);
+    setErrMsg('');
     getArticles(topicQuery, sortQuery, orderQuery)
       .then((data) => {
         setArticles(data);
@@ -24,7 +23,6 @@ function ArticleList() {
       })
       .catch((error) => {
         setLoading(false);
-        setError(true);
         setErrMsg(error.response.data);
       });
   }, [topicQuery, sortQuery, orderQuery]);
@@ -32,7 +30,7 @@ function ArticleList() {
   if (loading) {
     return <p>loading!</p>;
   }
-  if (error) {
+  if (errMsg) {
     return <ErrorHandling errMsg={errMsg} />;
   }
   return (
