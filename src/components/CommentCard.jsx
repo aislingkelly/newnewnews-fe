@@ -1,5 +1,8 @@
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
+import { FaCalendar } from 'react-icons/fa6';
+import { FaComment } from 'react-icons/fa6';
+import { FaArrowDownUpAcrossLine } from 'react-icons/fa6';
 import DeleteCommentButton from './DeleteComment';
 
 function CommentCard({ comment, setComments }) {
@@ -17,7 +20,8 @@ function CommentCard({ comment, setComments }) {
     <div className="comment-card">
       <p>{comment.body}</p>
       <small>
-        This comment was written by {comment.author} at {publishedAt} | Votes:
+        <FaComment /> {comment.author} <FaCalendar /> {publishedAt}{' '}
+        <FaArrowDownUpAcrossLine />
         {comment.votes}
       </small>
 

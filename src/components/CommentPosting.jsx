@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { postComment } from '../utils/api';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
+import { FaPaperPlane } from 'react-icons/fa6';
 function CommentPosting({ article_id, setComments }) {
   const { user } = useContext(UserContext);
   const [error, setError] = useState(false);
@@ -48,18 +49,22 @@ function CommentPosting({ article_id, setComments }) {
       <p>Commenting as {user}</p>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
-          <label htmlFor="comment-username-input">Username: </label>
-          <input
-            type="text"
-            placeholder="Username"
-            id="comment-username-input"
-            onChange={updateInput}
-            value={input.username}
-            name="username"
-            disabled
-          />
+          <label htmlFor="comment-username-input" className="hidden">
+            Username:
+            <input
+              type="text"
+              placeholder="Username"
+              id="comment-username-input"
+              onChange={updateInput}
+              value={input.username}
+              name="username"
+              disabled
+            />
+          </label>
 
-          <label htmlFor="comment-body-input">Your comment: </label>
+          <label htmlFor="comment-body-input" class="hidden">
+            Your comment:
+          </label>
           <textarea
             placeholder="Your comment"
             id="comment-body-input"
@@ -67,13 +72,15 @@ function CommentPosting({ article_id, setComments }) {
             value={input.body}
             name="body"
           />
-          <p>
-            {' '}
-            {validateMsg ? 'Your comment must be 20 characters or more' : null}
-          </p>
 
-          <button disabled={loading}>Submit</button>
+          <button disabled={loading}>
+            Comment <FaPaperPlane />
+          </button>
         </form>
+        <p>
+          {' '}
+          {validateMsg ? 'Your comment must be 20 characters or more' : null}
+        </p>
         {loading ? <p>Working on it...</p> : null}
         {error ? (
           <p>There's an issue posting your comment. Are you logged in?</p>
@@ -84,11 +91,3 @@ function CommentPosting({ article_id, setComments }) {
 }
 
 export default CommentPosting;
-
-// {
-//   "item_name": "Test item",
-//   "description": "testy mc test face",
-//   "img_url": "https://test.com/Test-item.jpg",
-//   "price": 100,
-//   "category_name": "Relics"
-// }

@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<ArticleList />} />
           <Route path="/articles" element={<ArticleList />} />
           <Route path="/articles/:article_id" element={<Article />} />
-          <Route path="*" element={<ErrorHandling />} />
+          <Route path="*" element={<ErrorHandling errMsg="" />} />
         </Routes>
         <Footer />
       </UserProvider>

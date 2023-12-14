@@ -34,12 +34,17 @@ function Article() {
   }
   return (
     <main>
-      <article>
-        <h2>{article.title}</h2>
-        <img src={article.article_img_url} alt={article.title} />
-        <p>{article.body}</p>
-        <small>This article was written by: {article.author}</small>
-        <ArticleVoting article_id={article_id} initialVotes={article.votes} />
+      <article className="article-page">
+        <div>
+          <img src={article.article_img_url} alt={article.title} />
+        </div>
+        <div className="article-body">
+          <h2>{article.title}</h2>
+          <small>By {article.author}</small>
+
+          <p>{article.body}</p>
+          <ArticleVoting article_id={article_id} initialVotes={article.votes} />
+        </div>
       </article>
 
       <CommentList />

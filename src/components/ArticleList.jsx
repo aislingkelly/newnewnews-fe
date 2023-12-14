@@ -36,23 +36,25 @@ function ArticleList() {
     return <ErrorHandling errMsg={errMsg} />;
   }
   return (
-    <main>
-      <Sort
-        setSortQuery={setSortQuery}
-        sortQuery={sortQuery}
-        setOrderQuery={setOrderQuery}
-        orderQuery={orderQuery}
-      />
-      <ul className="article-list grid">
-        {articles.map((article) => {
-          return (
-            <li key={article.article_id} className="grid__item">
-              <ArticleCard article={article} />
-            </li>
-          );
-        })}
-      </ul>
-    </main>
+    <>
+      <main>
+        <Sort
+          setSortQuery={setSortQuery}
+          sortQuery={sortQuery}
+          setOrderQuery={setOrderQuery}
+          orderQuery={orderQuery}
+        />
+        <ul className="article-list grid">
+          {articles.map((article) => {
+            return (
+              <li key={article.article_id} className="grid__item">
+                <ArticleCard article={article} />
+              </li>
+            );
+          })}
+        </ul>
+      </main>
+    </>
   );
 }
 
