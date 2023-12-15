@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Loading from './Loading';
 import ErrorHandling from './ErrorHandling';
 
-function Topics() {
+function TopicList() {
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState(false);
@@ -15,27 +15,27 @@ function Topics() {
         setLoading(false);
       })
       .catch((error) => {
-        setErrMsg(error.response.data);
+        setErrMsg(error.response?.data || 'Error');
       });
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (errMsg) {
-    return <ErrorHandling errMsg={errMsg} />;
-  }
   return (
-    <ul className="topic-list">
-      {topics.map((topic) => {
-        return (
-          <li key={topic.slug}>
-            <Link to={`/articles/?topic=${topic.slug}`}>{topic.slug}</Link>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      {loading ? (
+        <Loading />
+      ) : errMsg ? (
+        <ErrorHandling errMsg={errMsg} />
+      ) : (
+        <ul className="topic-list">
+          {topics.map((topic) => (
+            <li key={topic.slug}>
+              <Link to={`/articles/?topic=${topic.slug}`}>{topic.slug}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
 
-export default Topics;
+export default TopicList;
