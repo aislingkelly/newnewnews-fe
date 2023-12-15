@@ -22,9 +22,9 @@ function Article() {
       })
       .catch((error) => {
         setLoading(false);
-        setErrMsg(error.response.data);
+        setErrMsg(error.response?.data || 'Error');
       });
-  }, [article_id]); // Added dependency to re-fetch if article_id changes
+  }, [article_id]);
 
   if (loading) {
     return <Loading />;
@@ -46,7 +46,6 @@ function Article() {
           <ArticleVoting article_id={article_id} initialVotes={article.votes} />
         </div>
       </article>
-
       <CommentList />
     </main>
   );

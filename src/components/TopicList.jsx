@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Loading from './Loading';
 import ErrorHandling from './ErrorHandling';
 
-function Topics() {
+function TopicList() {
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState(false);
@@ -15,7 +15,7 @@ function Topics() {
         setLoading(false);
       })
       .catch((error) => {
-        setErrMsg(error.response.data);
+        setErrMsg(error.response?.data || 'Error');
       });
   }, []);
 
@@ -38,4 +38,4 @@ function Topics() {
   );
 }
 
-export default Topics;
+export default TopicList;

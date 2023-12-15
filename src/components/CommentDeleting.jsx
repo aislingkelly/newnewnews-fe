@@ -3,6 +3,7 @@ import { deleteComment } from '../utils/api';
 import { FaRegTrashCan } from 'react-icons/fa6';
 
 import ErrorHandling from './ErrorHandling';
+import Loading from './Loading';
 
 function CommentDeleting({ comment, setComments }) {
   const [errMsg, setErrMsg] = useState('');
@@ -21,24 +22,27 @@ function CommentDeleting({ comment, setComments }) {
         setLoading(false);
       })
       .catch((error) => {
-        setErrMsg(error.response.data);
         setLoading(false);
+        console.log(error.message);
+        setErrMsg(error.message || 'Error');
       });
   };
 
-  if (errMsg) {
-    return <ErrorHandling errMsg={errMsg} />;
-  }
-
   return (
     <>
-      <button
-        onClick={() => handleDeleteClick(comment.comment_id)}
-        disabled={loading}
-      >
-        Delete <FaRegTrashCan />
-      </button>
-      {loading ? <p>working on it...</p> : null}
+      {errMsg ? (
+        <ErrorHandling errMsg={errMsg} />
+      ) : (
+        <>
+          <button
+            onClick={() => handleDeleteClick(comment.comment_id)}
+            disabled={loading}
+          >
+            Delete <FaRegTrashCan />
+          </button>
+          {loading && <Loading />}
+        </>
+      )}
     </>
   );
 }

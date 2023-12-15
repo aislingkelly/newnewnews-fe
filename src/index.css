@@ -360,10 +360,27 @@ svg {
   align-items: stretch;
   gap: 2em;
 }
+.users-list li {
+  border: 1px solid var(--black);
+  transition: 0.2s;
+  padding: 0 2em;
+  min-width: 200px;
+}
 
-/* .users-list li {
-  min-width: 300px;
-} */
+.users-list li:hover {
+  cursor: pointer;
+  transform: translateY(-0.2%);
+  box-shadow: 0.5rem 0.5rem var(--black);
+}
+
+.user-selected {
+  box-shadow: 0.5rem 0.5rem var(--black);
+}
+
+.users-list li img {
+  margin-top: 2em;
+  margin-left: 1em;
+}
 
 footer a {
   color: white;
@@ -481,11 +498,14 @@ footer a {
   footer {
     flex-direction: row;
   }
-  .users-list {
-    gap: 10em;
-  }
 }
 
 .article-page button {
   margin-bottom: 1em;
+}
+
+.errors {
+  margin: 2em;
+  padding: 1em;
+  border: 1px solid var(--red);
 }

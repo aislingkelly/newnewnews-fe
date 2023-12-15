@@ -8,9 +8,9 @@ import ErrorHandling from './ErrorHandling';
 
 function CommentPosting({ article_id, setComments }) {
   const { user } = useContext(UserContext);
-  const [errMsg, setErrMsg] = useState('');
   const [input, setInput] = useState({ username: user, body: '' });
   const [validateMsg, setValidateMsg] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
   const updateInput = (e) => {

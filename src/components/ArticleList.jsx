@@ -27,7 +27,7 @@ function ArticleList() {
       })
       .catch((error) => {
         setLoading(false);
-        setErrMsg(error.response.data);
+        setErrMsg(error.response?.data || 'Error');
       });
   }, [topicQuery, sortQuery, orderQuery]);
 
