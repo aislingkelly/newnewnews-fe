@@ -31,31 +31,29 @@ function ArticleList() {
       });
   }, [topicQuery, sortQuery, orderQuery]);
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (errMsg) {
-    return <ErrorHandling errMsg={errMsg} />;
-  }
   return (
     <>
-      <main>
-        <ArticleSorting
-          setSortQuery={setSortQuery}
-          sortQuery={sortQuery}
-          setOrderQuery={setOrderQuery}
-          orderQuery={orderQuery}
-        />
-        <ul className="article-list grid">
-          {articles.map((article) => {
-            return (
+      {loading ? (
+        <Loading />
+      ) : errMsg ? (
+        <ErrorHandling errMsg={errMsg} />
+      ) : (
+        <main>
+          <ArticleSorting
+            setSortQuery={setSortQuery}
+            sortQuery={sortQuery}
+            setOrderQuery={setOrderQuery}
+            orderQuery={orderQuery}
+          />
+          <ul className="article-list grid">
+            {articles.map((article) => (
               <li key={article.article_id} className="grid__item">
                 <ArticleCard article={article} />
               </li>
-            );
-          })}
-        </ul>
-      </main>
+            ))}
+          </ul>
+        </main>
+      )}
     </>
   );
 }

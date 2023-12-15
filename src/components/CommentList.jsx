@@ -25,25 +25,25 @@ function CommentList() {
       });
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (errMsg) {
-    return <ErrorHandling errMsg={errMsg} />;
-  }
   return (
     <section className="comments-section">
-      <h3>Comments</h3>
-      <CommentPosting article_id={article_id} setComments={setComments} />
-      <ul className="comment-list">
-        {comments.map((comment) => {
-          return (
-            <li key={comment.comment_id}>
-              <CommentCard comment={comment} setComments={setComments} />
-            </li>
-          );
-        })}
-      </ul>
+      {loading ? (
+        <Loading />
+      ) : errMsg ? (
+        <ErrorHandling errMsg={errMsg} />
+      ) : (
+        <>
+          <h3>Comments</h3>
+          <CommentPosting article_id={article_id} setComments={setComments} />
+          <ul className="comment-list">
+            {comments.map((comment) => (
+              <li key={comment.comment_id}>
+                <CommentCard comment={comment} setComments={setComments} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </section>
   );
 }

@@ -5,6 +5,7 @@ import { FaRegPaperPlane } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 import ErrorHandling from './ErrorHandling';
+import Loading from './Loading';
 
 function CommentPosting({ article_id, setComments }) {
   const { user } = useContext(UserContext);
@@ -43,7 +44,6 @@ function CommentPosting({ article_id, setComments }) {
 
   return (
     <>
-      {' '}
       {user ? (
         <>
           <h5>Commenting as {user}</h5>
@@ -78,7 +78,7 @@ function CommentPosting({ article_id, setComments }) {
               </button>
             </form>
             {validateMsg && <p>Your comment must be at least 20 characters</p>}
-            {loading && <p>Working on it...</p>}
+            {loading && <Loading />}
             {errMsg && <ErrorHandling errMsg={errMsg} />}
           </div>{' '}
         </>

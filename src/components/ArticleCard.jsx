@@ -10,7 +10,7 @@ function ArticleCard({ article }) {
   const publishedAt = formatDateString(article.created_at);
 
   return (
-    <Link to={`/articles/${article.article_id}`} className={'link-styles'}>
+    <Link to={`/articles/${article.article_id}`} className={'no-decoration'}>
       <article className="article-list-article">
         <img
           src={article.article_img_url}

@@ -26,27 +26,29 @@ function Article() {
       });
   }, [article_id]);
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (errMsg) {
-    return <ErrorHandling errMsg={errMsg} />;
-  }
   return (
     <main>
-      <article className="article-page">
-        <div>
-          <img src={article.article_img_url} alt={article.title} />
-        </div>
-        <div className="article-body">
-          <h2>{article.title}</h2>
-          <small>By {article.author}</small>
-
-          <p>{article.body}</p>
-          <ArticleVoting article_id={article_id} initialVotes={article.votes} />
-        </div>
-      </article>
-      <CommentList />
+      {loading ? (
+        <Loading />
+      ) : errMsg ? (
+        <ErrorHandling errMsg={errMsg} />
+      ) : (
+        <article className="article-page">
+          <div>
+            <img src={article.article_img_url} alt={article.title} />
+          </div>
+          <div className="article-body">
+            <h2>{article.title}</h2>
+            <small>By {article.author}</small>
+            <p>{article.body}</p>
+            <ArticleVoting
+              article_id={article_id}
+              initialVotes={article.votes}
+            />
+          </div>
+        </article>
+      )}
+      {!loading && !errMsg && <CommentList />}
     </main>
   );
 }

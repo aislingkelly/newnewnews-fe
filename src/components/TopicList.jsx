@@ -19,22 +19,22 @@ function TopicList() {
       });
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (errMsg) {
-    return <ErrorHandling errMsg={errMsg} />;
-  }
   return (
-    <ul className="topic-list">
-      {topics.map((topic) => {
-        return (
-          <li key={topic.slug}>
-            <Link to={`/articles/?topic=${topic.slug}`}>{topic.slug}</Link>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      {loading ? (
+        <Loading />
+      ) : errMsg ? (
+        <ErrorHandling errMsg={errMsg} />
+      ) : (
+        <ul className="topic-list">
+          {topics.map((topic) => (
+            <li key={topic.slug}>
+              <Link to={`/articles/?topic=${topic.slug}`}>{topic.slug}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
 

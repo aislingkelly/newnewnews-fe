@@ -29,14 +29,11 @@ function UserList() {
       });
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (errMsg) {
-    return <ErrorHandling errMsg={errMsg} />;
-  }
-
-  return (
+  return loading ? (
+    <Loading />
+  ) : errMsg ? (
+    <ErrorHandling errMsg={errMsg} />
+  ) : (
     <main className="users">
       <h2>Choose your own adventure</h2>
       <p>

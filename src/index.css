@@ -11,6 +11,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography -------------------------------- */
+
 html {
   font-size: 16px;
 }
@@ -85,6 +87,58 @@ small,
   font-weight: 600;
 }
 
+a {
+  text-decoration: underline transparent;
+  transition: text-decoration 300ms ease;
+}
+a:hover {
+  text-decoration-color: var(--yellow);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Buttons and Links -------------*/
+
+button {
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid var(--black);
+  margin: 0 1rem;
+  position: relative;
+  transition: 0.2s;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: translateY(-0.8%);
+  box-shadow: 0.5rem 0.5rem var(--black);
+}
+
+svg {
+  padding-right: 0.2em;
+}
+
+a {
+  color: var(--black);
+}
+
+.no-decoration {
+  text-decoration: none;
+}
+
+/* Structure -----------------------------------*/
+
+main {
+  padding: 2rem;
+}
+
 .app-container {
   border-left: 1px solid var(--black);
   border-right: 1px solid var(--black);
@@ -92,24 +146,17 @@ small,
   margin: 0 auto;
 }
 
+.hidden {
+  display: none;
+}
+
+/* Header & Nav -------------------------------- */
+
 header {
   border-bottom: 1px solid var(--black);
 }
-
-footer {
-  background-color: var(--black);
-  border-top: 1px solid var(--black);
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: white;
-}
-
-.footer-container,
-.get-in-touch {
-  padding: 2rem;
-  max-width: 50%;
+.logo {
+  text-decoration: none;
 }
 
 .header-nav {
@@ -121,34 +168,6 @@ footer {
   border-bottom: 1px solid var(--black);
 }
 
-.article-page {
-  display: flex;
-  flex-direction: column;
-}
-
-.article-page img {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-}
-
-.article-body {
-  padding: 15px;
-}
-
-a {
-  text-decoration: underline transparent;
-  transition: text-decoration 300ms ease;
-}
-a:hover {
-  text-decoration-color: var(--yellow);
-}
-
-.logo {
-  text-decoration: none;
-}
-
-/**/
 nav ul {
   box-sizing: border-box;
   display: flex;
@@ -183,15 +202,62 @@ nav li a:hover {
   box-shadow: 0.5rem 0.5rem var(--black);
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.user-icon,
+.nav-question {
+  font-family: 'Figtree', sans-serif;
+  line-height: 1.15;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.56em;
+  color: var(--black);
 }
 
-.link-styles {
-  text-decoration: none;
-  color: var(--black);
+.user-icon {
+  font-size: 1em;
+  font-weight: 300;
+}
+
+.topics {
+  padding: 0 2em;
+}
+.sort-form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+}
+
+.sort-form select {
+  border-radius: 0;
+  margin: 1rem;
+  border: none;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+/* Article and Comments -------------------------------- */
+
+.article-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-page img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.article-body {
+  padding: 15px;
+}
+
+.comments-section,
+.article-page {
+  border: 1px solid var(--black);
+}
+
+.article-page {
+  border-bottom: none;
 }
 
 .topic-topper a {
@@ -214,15 +280,6 @@ ul {
   font-weight: 900;
 }
 
-.comments-section,
-.article-page {
-  border: 1px solid var(--black);
-}
-
-.article-page {
-  border-bottom: none;
-}
-
 .comments-section {
   padding: 2rem;
 }
@@ -231,11 +288,11 @@ ul {
   max-width: 70ch;
 }
 
-.hidden {
-  display: none;
+.article-page button {
+  margin-bottom: 1em;
 }
 
-/*--------grid*/
+/* Article Grid */
 .grid {
   display: grid;
   width: 100%;
@@ -255,7 +312,7 @@ ul {
   box-shadow: 0.5rem 0.5rem var(--black);
 }
 
-/*cards*/
+/* Article Cards */
 .card-img {
   display: block;
   width: 100%;
@@ -281,73 +338,42 @@ ul {
   padding: 0 1rem;
 }
 
-.topics {
-  padding: 0 2em;
-}
-
-main {
-  padding: 2rem;
-}
-
-.user-icon,
-.nav-question {
-  font-family: 'Figtree', sans-serif;
-  line-height: 1.15;
-  font-weight: 600;
-  font-style: italic;
-  font-size: 1.56em;
-  color: var(--black);
-}
-
-.user-icon {
-  font-size: 1em;
-  font-weight: 300;
-}
-
-a {
-  color: var(--black);
-}
-
-.sort-form {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 2rem;
-}
-
-.sort-form select {
-  border-radius: 0;
-  margin: 1rem;
-  border: none;
-  font-size: 1em;
-  font-weight: 300;
-}
-
-button {
-  background-color: white;
-  padding: 1rem;
-  border: 1px solid var(--black);
-  margin: 0 1rem;
-  position: relative;
-  transition: 0.2s;
-  font-family: 'Figtree', sans-serif;
-  font-weight: 600;
-  font-size: 1em;
-}
-
-button:hover {
-  cursor: pointer;
-  transform: translateY(-0.8%);
-  box-shadow: 0.5rem 0.5rem var(--black);
-}
-
-svg {
-  padding-right: 0.2em;
-}
-
 .comment-card {
   margin: 3em 0;
 }
 
+/* Footer -------------------------------- */
+
+footer {
+  background-color: var(--black);
+  border-top: 1px solid var(--black);
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+}
+
+.footer-container,
+.get-in-touch {
+  padding: 2rem;
+  max-width: 50%;
+}
+
+footer a {
+  color: white;
+}
+
+.logo {
+  grid-area: text;
+  font-size: 10vmin;
+  font-weight: 900;
+  margin: 0;
+  color: white;
+  text-shadow: 0.4vmin 0.4vmin 0 var(--red), -0.4vmin -0.4vmin 0 var(--blue);
+}
+
+/* Users --------------------------------*/
 .users img {
   max-width: 150px;
 }
@@ -382,20 +408,15 @@ svg {
   margin-left: 1em;
 }
 
-footer a {
-  color: white;
+/* Errors ----------------------------*/
+
+.errors {
+  margin: 2em;
+  padding: 1em;
+  border: 1px solid var(--red);
 }
 
-.logo {
-  grid-area: text;
-  font-size: 10vmin;
-  font-weight: 900;
-  margin: 0;
-  color: white;
-  text-shadow: 0.4vmin 0.4vmin 0 var(--red), -0.4vmin -0.4vmin 0 var(--blue);
-}
-
-/*-----Loader*/
+/* Loader-----------------------------*/
 
 .loader {
   display: inline-block;
@@ -435,7 +456,7 @@ footer a {
   }
 }
 
-/*-----------big screen*/
+/* Big screen -----------------------------*/
 
 @media screen and (min-width: 768px) {
   .grid__item:first-child {
@@ -498,14 +519,4 @@ footer a {
   footer {
     flex-direction: row;
   }
-}
-
-.article-page button {
-  margin-bottom: 1em;
-}
-
-.errors {
-  margin: 2em;
-  padding: 1em;
-  border: 1px solid var(--red);
 }
