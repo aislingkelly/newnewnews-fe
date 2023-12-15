@@ -1,4 +1,4 @@
-const ArticleSort = ({
+const ArticleSorting = ({
   sortQuery,
   setSortQuery,
   orderQuery,
@@ -34,4 +34,4 @@ const ArticleSort = ({
   );
 };
 
-export default ArticleSort;
+export default ArticleSorting;

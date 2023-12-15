@@ -33,11 +33,11 @@ function Users() {
     return <ErrorHandling errMsg={errMsg} />;
   }
   return (
-    <section className="users">
+    <main className="users">
       <h2>Users</h2>
       <p>
-        There is currently no authentication on NewNewNews. So please click a
-        valid user below to interact as that user.
+        There is currently no authentication on NewNewNews. Please click a user
+        below to interact as that user.
       </p>
       {user ? <h4>You're logged in as {user}</h4> : ''}
       <ul className="users-list">
@@ -58,7 +58,7 @@ function Users() {
           );
         })}
       </ul>
-    </section>
+    </main>
   );
 }
 

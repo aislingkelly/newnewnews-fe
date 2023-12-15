@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getArticles } from '../utils/api';
 import { useSearchParams } from 'react-router-dom';
 import ArticleCard from './ArticleCard';
-import ArticleSort from './ArticleSort';
+import ArticleSorting from './ArticleSorting';
 import ErrorHandling from './ErrorHandling';
 import Loading from './Loading';
 
@@ -40,7 +40,7 @@ function ArticleList() {
   return (
     <>
       <main>
-        <ArticleSort
+        <ArticleSorting
           setSortQuery={setSortQuery}
           sortQuery={sortQuery}
           setOrderQuery={setOrderQuery}

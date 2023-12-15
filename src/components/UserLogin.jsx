@@ -12,7 +12,7 @@ function UserLogin() {
         <Link to="/users" className="login-link">
           <p className="user-icon">
             <FaUserSecret />
-            Log in here
+            Log in
           </p>
         </Link>
       ) : (

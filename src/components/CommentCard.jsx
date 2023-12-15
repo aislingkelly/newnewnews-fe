@@ -3,7 +3,7 @@ import { UserContext } from '../contexts/UserContext';
 import { FaRegCalendar, FaRegUser, FaRegHandPointRight } from 'react-icons/fa6';
 import { formatDateString } from '../utils/utils';
 
-import CommentDelete from './CommentDelete';
+import CommentDeleting from './CommentDeleting';
 
 function CommentCard({ comment, setComments }) {
   const { user } = useContext(UserContext);
@@ -21,7 +21,7 @@ function CommentCard({ comment, setComments }) {
       </small>
 
       {comment.author === user ? (
-        <CommentDelete comment={comment} setComments={setComments} />
+        <CommentDeleting comment={comment} setComments={setComments} />
       ) : null}
     </div>
   );

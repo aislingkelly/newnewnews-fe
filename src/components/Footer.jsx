@@ -9,10 +9,13 @@ function Footer() {
         </h4>
         <p>
           NewNewNews is a frontend application built using React. This interface
-          serves as the user-facing component of an API-driven backend, meant to
-          mimic platforms like Reddit. The focus is on providing an interface
-          that facilitates access to the application's features. The React
-          framework enables interaction with the backend.
+          serves as the user-facing component of an{' '}
+          <a href="https://github.com/aislingkelly/new-new-news">
+            API-driven backend
+          </a>
+          , meant to mimic platforms like Reddit. The focus is on providing an
+          interface that facilitates access to the application's features. The
+          React framework enables interaction with the backend.
         </p>
       </div>
       <div className="get-in-touch">

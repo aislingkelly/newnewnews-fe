@@ -3,9 +3,8 @@ import { deleteComment } from '../utils/api';
 import { FaRegTrashCan } from 'react-icons/fa6';
 
 import ErrorHandling from './ErrorHandling';
-import Loading from './Loading';
 
-function CommentDelete({ comment, setComments }) {
+function CommentDeleting({ comment, setComments }) {
   const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -44,4 +43,4 @@ function CommentDelete({ comment, setComments }) {
   );
 }
 
-export default CommentDelete;
+export default CommentDeleting;
