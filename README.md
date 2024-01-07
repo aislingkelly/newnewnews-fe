@@ -15,7 +15,7 @@
 
 This project, "NewNewNews", is a frontend user interface for the related backend API. It was developed as part of the Northcoders software development bootcamp.
 
-- **Live Version:** [New New News](https://newnewnews.netlify.app/)
+- **Live Version:** [NewNewNews](https://newnewnews.netlify.app/)
 - **Live Backend:** [Backend API](https://new-new-news.onrender.com/api)
 
 ## Technologies Used
